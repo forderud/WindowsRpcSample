@@ -2,15 +2,15 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="hello_s.c" />
+    <ClCompile Include="MyRpc_s.c" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="hello.idl" />
+    <Midl Include="MyRpc.idl" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="hello.acf" />
+    <None Include="MyRpc.acf" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="hello_h.h" />
+    <ClInclude Include="MyRpc_h.h" />
   </ItemGroup>
 </Project>

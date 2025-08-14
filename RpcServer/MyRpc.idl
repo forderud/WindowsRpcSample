@@ -2,7 +2,7 @@
 [uuid(8E5B35CA-F76A-4689-9547-F28FAA94E686),
  version(1.0),
  endpoint("ncalrpc:[MyRcpServer]")]
-interface hello {
+interface MyRpc {
     void PrintMessage([in, string] const wchar_t* msg);
 
     void Shutdown();

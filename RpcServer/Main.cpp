@@ -1,14 +1,14 @@
 // based on https://learn.microsoft.com/en-us/windows/win32/rpc/the-server-application
 #include <stdio.h>
 #include <windows.h>
-#include "hello_h.h"
+#include "MyRpc_h.h"
 
 #pragma comment(lib, "Rpcrt4.lib")
 
 
 int main() {
     {
-        RPC_SERVER_INTERFACE* ifc = (RPC_SERVER_INTERFACE*)hello_v1_0_s_ifspec;
+        RPC_SERVER_INTERFACE* ifc = (RPC_SERVER_INTERFACE*)MyRpc_v1_0_s_ifspec;
         RPC_STATUS status = RpcServerUseProtseqEpA(
             ifc->RpcProtseqEndpoint->RpcProtocolSequence,
             RPC_C_LISTEN_MAX_CALLS_DEFAULT,
@@ -18,7 +18,7 @@ int main() {
             exit(status);
     }
 
-    RPC_STATUS status = RpcServerRegisterIf(hello_v1_0_s_ifspec, NULL, NULL);
+    RPC_STATUS status = RpcServerRegisterIf(MyRpc_v1_0_s_ifspec, NULL, NULL);
     if (status)
         exit(status);
 

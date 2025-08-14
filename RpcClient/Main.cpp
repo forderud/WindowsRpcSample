@@ -1,7 +1,7 @@
 // based on https://learn.microsoft.com/en-us/windows/win32/rpc/the-client-application
 #include <stdio.h>
 #include <windows.h>
-#include "../RpcServer/hello_h.h"
+#include "../RpcServer/MyRpc_h.h"
 
 #pragma comment(lib, "Rpcrt4.lib")
 
@@ -9,7 +9,7 @@
 int main() {
     unsigned char* stringBinding = nullptr;
     {
-        RPC_SERVER_INTERFACE* ifc = (RPC_SERVER_INTERFACE*)hello_v1_0_c_ifspec;
+        RPC_SERVER_INTERFACE* ifc = (RPC_SERVER_INTERFACE*)MyRpc_v1_0_c_ifspec;
 
         unsigned char* pszOptions = nullptr;
 
@@ -23,7 +23,7 @@ int main() {
             exit(status);
     }
 
-    RPC_STATUS status = RpcBindingFromStringBindingA(stringBinding, &hello_IfHandle);
+    RPC_STATUS status = RpcBindingFromStringBindingA(stringBinding, &MyRpc_IfHandle);
     if (status)
         exit(status);
 
@@ -41,7 +41,7 @@ int main() {
     wprintf(L"Requesting server shutdown...\n");
     Shutdown();
 
-    status = RpcBindingFree(&hello_IfHandle);
+    status = RpcBindingFree(&MyRpc_IfHandle);
     if (status)
         exit(status);
 
