@@ -1,4 +1,3 @@
-// sample from https://learn.microsoft.com/en-us/windows/win32/rpc/the-idl-file
 [uuid(8E5B35CA-F76A-4689-9547-F28FAA94E686),
  version(1.0),
  endpoint("ncalrpc:[MyRcpServer]")]

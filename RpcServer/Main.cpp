@@ -1,4 +1,3 @@
-// based on https://learn.microsoft.com/en-us/windows/win32/rpc/the-server-application
 #include <stdio.h>
 #include <windows.h>
 #include "MyRpc_h.h"
