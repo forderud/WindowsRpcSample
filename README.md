@@ -1,4 +1,4 @@
-Sample Windows RPC code. Demonstrates how to peform remote procedure calls (RPC) to call functions across process boundaries.
+Sample Windows RPC code. Demonstrates how to perform Remote Procedure Calls (RPC) to call functions across process boundaries.
 
 
 Using the [`ncalrpc`](https://learn.microsoft.com/en-us/windows/win32/midl/ncalrpc) (ALPC) transport, which is the same as used for inter-process COM calls.
