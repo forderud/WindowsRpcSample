@@ -36,7 +36,7 @@ int main() {
     }
 
     wprintf(L"Calling RPC function...\n");
-    HelloProc(L"Hi, there!");
+    PrintMessage(L"Hi, there!");
 
     wprintf(L"Requesting server shutdown...\n");
     Shutdown();

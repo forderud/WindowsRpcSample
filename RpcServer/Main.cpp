@@ -32,7 +32,7 @@ int main() {
 
 
 /* RPC interface function */
-void HelloProc(/*string*/ const wchar_t* msg) {
+void PrintMessage(/*string*/ const wchar_t* msg) {
     wprintf(L"Received message: %s\n", msg);
 }
 

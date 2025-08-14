@@ -3,7 +3,7 @@
  version(1.0),
  endpoint("ncalrpc:[MyRcpServer]")]
 interface hello {
-    void HelloProc([in, string] const wchar_t* pszString);
+    void PrintMessage([in, string] const wchar_t* msg);
 
     void Shutdown();
 }
