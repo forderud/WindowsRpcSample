@@ -12,7 +12,7 @@ int main() {
             ifc->RpcProtseqEndpoint->RpcProtocolSequence,
             RPC_C_LISTEN_MAX_CALLS_DEFAULT,
             ifc->RpcProtseqEndpoint->Endpoint,
-            nullptr); // Security
+            nullptr); // security
         if (status)
             exit(status);
     }

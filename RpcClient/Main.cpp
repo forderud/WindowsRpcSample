@@ -9,9 +9,9 @@ int main() {
     unsigned char* stringBinding = nullptr;
     {
         RPC_SERVER_INTERFACE* ifc = (RPC_SERVER_INTERFACE*)MyRpc_v1_0_c_ifspec;
-        RPC_STATUS status = RpcStringBindingComposeA(nullptr, // Uuid
+        RPC_STATUS status = RpcStringBindingComposeA(nullptr, // uuid
             ifc->RpcProtseqEndpoint->RpcProtocolSequence,
-            nullptr, // NetworkAddress
+            nullptr, // net addr.
             ifc->RpcProtseqEndpoint->Endpoint,
             nullptr, // options
             &stringBinding);
