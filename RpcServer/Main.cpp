@@ -24,6 +24,7 @@ int main() {
     if (status)
         exit(status);
 
+    // listen to clients (blocking call)
     unsigned int cMinCalls = 1;
     unsigned int fDontWait = FALSE;
     status = RpcServerListen(cMinCalls, RPC_C_LISTEN_MAX_CALLS_DEFAULT, fDontWait);

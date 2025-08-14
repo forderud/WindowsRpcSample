@@ -9,7 +9,7 @@
 
 
 int main() {
-    unsigned char* pszStringBinding = nullptr;
+    unsigned char* stringBinding = nullptr;
     {
         RPC_SERVER_INTERFACE* ifc = (RPC_SERVER_INTERFACE*)hello_v1_0_c_ifspec;
 
@@ -20,28 +20,27 @@ int main() {
             nullptr, // NetworkAddress
             ifc->RpcProtseqEndpoint->Endpoint,
             pszOptions,
-            &pszStringBinding);
+            &stringBinding);
         if (status)
             exit(status);
     }
 
-    RPC_STATUS status = RpcBindingFromStringBindingA(pszStringBinding, &hello_IfHandle);
+    RPC_STATUS status = RpcBindingFromStringBindingA(stringBinding, &hello_IfHandle);
     if (status)
         exit(status);
-
-    // clean up string
-    status = RpcStringFreeA(&pszStringBinding);
-    if (status)
-        exit(status);
-    pszStringBinding = nullptr;
-
 
     {
-        // call RPC functions
-        HelloProc(L"hello, world");
-
-        Shutdown();
+        // clean up string
+        status = RpcStringFreeA(&stringBinding);
+        if (status)
+            exit(status);
+        stringBinding = nullptr;
     }
+
+    // call RPC functions
+    HelloProc(L"hello, world");
+
+    Shutdown();
 
     status = RpcBindingFree(&hello_IfHandle);
     if (status)
