@@ -45,7 +45,7 @@ int main() {
         exit(status);
 
     wprintf(L"[done]\n");
-    exit(0);
+    return 0;
 }
 
 

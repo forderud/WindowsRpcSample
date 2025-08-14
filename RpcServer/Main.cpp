@@ -28,6 +28,8 @@ int main() {
     status = RpcServerListen(cMinCalls, RPC_C_LISTEN_MAX_CALLS_DEFAULT, fDontWait);
     if (status)
         exit(status);
+
+    return 0;
 }
 
 
