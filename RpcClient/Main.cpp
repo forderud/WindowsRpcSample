@@ -9,20 +9,23 @@
 
 
 int main() {
-    RPC_SERVER_INTERFACE* ifc = (RPC_SERVER_INTERFACE*)hello_v1_0_c_ifspec;
-
-    unsigned char* pszOptions = nullptr;
     unsigned char* pszStringBinding = nullptr;
-    RPC_STATUS status = RpcStringBindingComposeA(nullptr, // Uuid
-        ifc->RpcProtseqEndpoint->RpcProtocolSequence,
-        nullptr, // NetworkAddress
-        ifc->RpcProtseqEndpoint->Endpoint,
-        pszOptions,
-        &pszStringBinding);
-    if (status)
-        exit(status);
+    {
+        RPC_SERVER_INTERFACE* ifc = (RPC_SERVER_INTERFACE*)hello_v1_0_c_ifspec;
 
-    status = RpcBindingFromStringBindingA(pszStringBinding, &hello_IfHandle);
+        unsigned char* pszOptions = nullptr;
+
+        RPC_STATUS status = RpcStringBindingComposeA(nullptr, // Uuid
+            ifc->RpcProtseqEndpoint->RpcProtocolSequence,
+            nullptr, // NetworkAddress
+            ifc->RpcProtseqEndpoint->Endpoint,
+            pszOptions,
+            &pszStringBinding);
+        if (status)
+            exit(status);
+    }
+
+    RPC_STATUS status = RpcBindingFromStringBindingA(pszStringBinding, &hello_IfHandle);
     if (status)
         exit(status);
 

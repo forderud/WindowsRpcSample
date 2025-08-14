@@ -9,16 +9,18 @@
 
 
 int main() {
-    RPC_SERVER_INTERFACE* ifc = (RPC_SERVER_INTERFACE*)hello_v1_0_s_ifspec;
-    RPC_STATUS status = RpcServerUseProtseqEpA(
-        ifc->RpcProtseqEndpoint->RpcProtocolSequence,
-        RPC_C_LISTEN_MAX_CALLS_DEFAULT,
-        ifc->RpcProtseqEndpoint->Endpoint,
-        nullptr); // Security
-    if (status)
-        exit(status);
+    {
+        RPC_SERVER_INTERFACE* ifc = (RPC_SERVER_INTERFACE*)hello_v1_0_s_ifspec;
+        RPC_STATUS status = RpcServerUseProtseqEpA(
+            ifc->RpcProtseqEndpoint->RpcProtocolSequence,
+            RPC_C_LISTEN_MAX_CALLS_DEFAULT,
+            ifc->RpcProtseqEndpoint->Endpoint,
+            nullptr); // Security
+        if (status)
+            exit(status);
+    }
 
-    status = RpcServerRegisterIf(hello_v1_0_s_ifspec, NULL, NULL);
+    RPC_STATUS status = RpcServerRegisterIf(hello_v1_0_s_ifspec, NULL, NULL);
     if (status)
         exit(status);
 
