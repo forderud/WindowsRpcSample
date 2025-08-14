@@ -33,7 +33,7 @@ int main() {
 
 /* RPC interface function */
 void PrintMessage(handle_t /*handle*/, /*string*/const wchar_t* msg) {
-    wprintf(L"Received message: %s\n", msg);
+    wprintf(L"Message: %s\n", msg);
 }
 
 int ComputeSum(handle_t /*handle*/, int a, int b) {
