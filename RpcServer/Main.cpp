@@ -12,7 +12,7 @@ int main() {
     RPC_STATUS status = RpcServerUseProtseqEpW(
         (unsigned short*)L"ncalrpc",
         RPC_C_LISTEN_MAX_CALLS_DEFAULT,
-        (unsigned short*)L"ncalrpc:[MyRpcServer]",
+        (unsigned short*)L"MyRpcServer", // endpoint
         nullptr); // Security
     if (status)
         exit(status);

@@ -14,7 +14,7 @@ int main() {
     RPC_STATUS status = RpcStringBindingComposeW(nullptr, // Uuid
         (unsigned short*)L"ncalrpc",
         nullptr, // NetworkAddress
-        (unsigned short*)L"ncalrpc:[MyRpcServer]",
+        (unsigned short*)L"MyRpcServer", // endpoint
         pszOptions,
         &pszStringBinding);
     if (status)
