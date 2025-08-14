@@ -4,6 +4,18 @@
 
 #pragma comment(lib, "Rpcrt4.lib")
 
+/** Get client process ID (PID) during processing of incomming RPC call. */
+static size_t GetClientProcessID(RPC_BINDING_HANDLE binding = nullptr) {
+    RPC_CALL_ATTRIBUTES attribs{};
+    attribs.Version = RPC_CALL_ATTRIBUTES_VERSION; // 3
+    attribs.Flags = RPC_QUERY_CLIENT_PID;
+    RPC_STATUS status = RpcServerInqCallAttributesW(binding, &attribs);
+    if (status != RPC_S_OK)
+        exit(status);
+
+    return (size_t)attribs.ClientPID;
+}
+
 
 int main() {
     {
@@ -37,7 +49,10 @@ int main() {
 
 
 /* RPC interface function */
-void PrintMessage(handle_t /*handle*/, /*string*/const wchar_t* msg) {
+void PrintMessage(handle_t handle, /*string*/const wchar_t* msg) {
+    auto pid = GetClientProcessID(handle);
+    wprintf(L"Client process PID: %zu\n", pid);
+
     wprintf(L"Message: %s\n", msg);
 }
 
