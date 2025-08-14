@@ -37,7 +37,7 @@ void PrintMessage(handle_t /*handle*/, /*string*/const wchar_t* msg) {
 }
 
 /* RPC interface function */
-void Shutdown(handle_t /*handle*/) {
+void RequestShutdown(handle_t /*handle*/) {
     wprintf(L"Receiving shutdown request.\n");
 
     RPC_STATUS status;

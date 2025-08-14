@@ -36,7 +36,7 @@ int main() {
     PrintMessage(serverHandle, L"Hi, there!");
 
     wprintf(L"Requesting server shutdown...\n");
-    Shutdown(serverHandle);
+    RequestShutdown(serverHandle);
 
     status = RpcBindingFree(&serverHandle);
     if (status)

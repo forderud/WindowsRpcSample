@@ -4,5 +4,5 @@
 interface MyRpc {
     void PrintMessage([in, string] const wchar_t* msg);
 
-    void Shutdown();
+    void RequestShutdown();
 }
