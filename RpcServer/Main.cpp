@@ -9,16 +9,15 @@
 
 
 int main() {
-    RPC_STATUS status = RpcServerUseProtseqEpA((unsigned char*)"ncacn_np",
+    RPC_STATUS status = RpcServerUseProtseqEpA(
+        (unsigned char*)"ncacn_np",
         RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned char*)"\\pipe\\hello",
         nullptr); // Security
     if (status)
         exit(status);
 
-    status = RpcServerRegisterIf(hello_v1_0_s_ifspec,
-        NULL,
-        NULL);
+    status = RpcServerRegisterIf(hello_v1_0_s_ifspec, NULL, NULL);
     if (status)
         exit(status);
 
