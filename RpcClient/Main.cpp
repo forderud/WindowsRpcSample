@@ -9,18 +9,18 @@
 
 
 int main() {
-    unsigned char* pszOptions = NULL;
-    unsigned char* pszStringBinding = NULL;
-    RPC_STATUS status = RpcStringBindingComposeA(nullptr, // Uuid
-        (unsigned char*)"ncacn_np",
+    unsigned short* pszOptions = NULL;
+    unsigned short* pszStringBinding = NULL;
+    RPC_STATUS status = RpcStringBindingComposeW(nullptr, // Uuid
+        (unsigned short*)L"ncacn_np",
         nullptr, // NetworkAddress
-        (unsigned char*)"\\pipe\\hello",
+        (unsigned short*)L"\\pipe\\hello",
         pszOptions,
         &pszStringBinding);
     if (status)
         exit(status);
 
-    status = RpcBindingFromStringBindingA(pszStringBinding, &hello_IfHandle);
+    status = RpcBindingFromStringBindingW(pszStringBinding, &hello_IfHandle);
     if (status)
         exit(status);
 
@@ -31,7 +31,7 @@ int main() {
         Shutdown();
     }
 
-    status = RpcStringFreeA(&pszStringBinding);
+    status = RpcStringFreeW(&pszStringBinding);
     if (status)
         exit(status);
 
