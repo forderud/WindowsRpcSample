@@ -1,9 +1,34 @@
+#include <cassert>
 #include <stdio.h>
 #include <windows.h>
 #include "../RpcServer/MyRpc_h.h"
 
 #pragma comment(lib, "Rpcrt4.lib")
 
+/** WIP code for trying to get the process ID from a RPC binding. */
+static void InspectServerBinding(RPC_BINDING_HANDLE binding) {
+    RPC_WSTR strBinding = nullptr;
+    RPC_STATUS status = RpcBindingToStringBindingW(binding, &strBinding);
+    assert(!status);
+
+    wchar_t* uuid = nullptr;
+    wchar_t* protSeq = nullptr;
+    wchar_t* netAddr = nullptr;
+    wchar_t* endpoint = nullptr;
+    wchar_t* options = nullptr;
+    status = RpcStringBindingParseW(strBinding, (unsigned short**)&uuid, (unsigned short**)&protSeq, (unsigned short**)&netAddr, (unsigned short**)&endpoint, (unsigned short**)&options);
+    assert(!status);
+
+    wprintf(L"Server protocol: %s, endpoint: %s\n", protSeq, endpoint);
+
+    RpcStringFreeW((unsigned short**)&uuid);
+    RpcStringFreeW((unsigned short**)&protSeq);
+    RpcStringFreeW((unsigned short**)&netAddr);
+    RpcStringFreeW((unsigned short**)&endpoint);
+    RpcStringFreeW((unsigned short**)&options);
+
+    RpcStringFreeW(&strBinding);
+}
 
 int main() {
     RPC_BINDING_HANDLE serverHandle = nullptr;
@@ -30,6 +55,8 @@ int main() {
             exit(status);
         stringBinding = nullptr;
     }
+
+    InspectServerBinding(serverHandle);
 
     wprintf(L"Calling RPC function...\n");
     PrintMessage(serverHandle, L"Hi, there!");
