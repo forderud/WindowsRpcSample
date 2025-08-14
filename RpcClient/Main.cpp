@@ -6,8 +6,9 @@
 
 
 int main() {
-    unsigned char* stringBinding = nullptr;
+    RPC_BINDING_HANDLE serverHandle = nullptr;
     {
+        unsigned char* stringBinding = nullptr;
         auto* ifc = (RPC_SERVER_INTERFACE*)MyRpc_v1_0_c_ifspec;
         RPC_STATUS status = RpcStringBindingComposeA(nullptr, // uuid
             ifc->RpcProtseqEndpoint->RpcProtocolSequence,
@@ -17,14 +18,12 @@ int main() {
             &stringBinding);
         if (status)
             exit(status);
-    }
 
-    RPC_BINDING_HANDLE serverHandle = nullptr;
-    RPC_STATUS status = RpcBindingFromStringBindingA(stringBinding, &serverHandle);
-    if (status)
-        exit(status);
+        // create server handle (doesn't actually connect)
+        status = RpcBindingFromStringBindingA(stringBinding, &serverHandle);
+        if (status)
+            exit(status);
 
-    {
         // clean up string
         status = RpcStringFreeA(&stringBinding);
         if (status)
@@ -38,7 +37,7 @@ int main() {
     wprintf(L"Requesting server shutdown...\n");
     RequestShutdown(serverHandle);
 
-    status = RpcBindingFree(&serverHandle);
+    RPC_STATUS status = RpcBindingFree(&serverHandle);
     if (status)
         exit(status);
 
