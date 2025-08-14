@@ -5,5 +5,5 @@
 interface hello {
     void HelloProc([in, string] const wchar_t* pszString);
 
-    void Shutdown(void);
+    void Shutdown();
 }
