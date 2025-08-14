@@ -1,0 +1,4 @@
+// sample from https://learn.microsoft.com/en-us/windows/win32/rpc/the-acf-file
+[implicit_handle (handle_t hello_IfHandle)] 
+interface hello {
+}
