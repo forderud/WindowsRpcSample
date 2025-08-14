@@ -9,10 +9,11 @@
 
 
 int main() {
-    RPC_STATUS status = RpcServerUseProtseqEpW(
-        (unsigned short*)L"ncalrpc",
+    RPC_SERVER_INTERFACE* ifc = (RPC_SERVER_INTERFACE*)hello_v1_0_s_ifspec;
+    RPC_STATUS status = RpcServerUseProtseqEpA(
+        ifc->RpcProtseqEndpoint->RpcProtocolSequence,
         RPC_C_LISTEN_MAX_CALLS_DEFAULT,
-        (unsigned short*)L"MyRpcServer", // endpoint
+        ifc->RpcProtseqEndpoint->Endpoint,
         nullptr); // Security
     if (status)
         exit(status);

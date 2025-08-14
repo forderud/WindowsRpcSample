@@ -9,18 +9,20 @@
 
 
 int main() {
-    unsigned short* pszOptions = NULL;
-    unsigned short* pszStringBinding = NULL;
-    RPC_STATUS status = RpcStringBindingComposeW(nullptr, // Uuid
-        (unsigned short*)L"ncalrpc",
+    RPC_SERVER_INTERFACE* ifc = (RPC_SERVER_INTERFACE*)hello_v1_0_c_ifspec;
+
+    unsigned char* pszOptions = NULL;
+    unsigned char* pszStringBinding = NULL;
+    RPC_STATUS status = RpcStringBindingComposeA(nullptr, // Uuid
+        ifc->RpcProtseqEndpoint->RpcProtocolSequence,
         nullptr, // NetworkAddress
-        (unsigned short*)L"MyRpcServer", // endpoint
+        ifc->RpcProtseqEndpoint->Endpoint,
         pszOptions,
         &pszStringBinding);
     if (status)
         exit(status);
 
-    status = RpcBindingFromStringBindingW(pszStringBinding, &hello_IfHandle);
+    status = RpcBindingFromStringBindingA(pszStringBinding, &hello_IfHandle);
     if (status)
         exit(status);
 
@@ -31,7 +33,7 @@ int main() {
         Shutdown();
     }
 
-    status = RpcStringFreeW(&pszStringBinding);
+    status = RpcStringFreeA(&pszStringBinding);
     if (status)
         exit(status);
 
