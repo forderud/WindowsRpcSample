@@ -20,7 +20,8 @@ int main() {
             exit(status);
     }
 
-    RPC_STATUS status = RpcBindingFromStringBindingA(stringBinding, &MyRpc_IfHandle);
+    RPC_BINDING_HANDLE serverHandle = nullptr;
+    RPC_STATUS status = RpcBindingFromStringBindingA(stringBinding, &serverHandle);
     if (status)
         exit(status);
 
@@ -33,12 +34,12 @@ int main() {
     }
 
     wprintf(L"Calling RPC function...\n");
-    PrintMessage(L"Hi, there!");
+    PrintMessage(serverHandle, L"Hi, there!");
 
     wprintf(L"Requesting server shutdown...\n");
-    Shutdown();
+    Shutdown(serverHandle);
 
-    status = RpcBindingFree(&MyRpc_IfHandle);
+    status = RpcBindingFree(&serverHandle);
     if (status)
         exit(status);
 

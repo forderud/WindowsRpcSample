@@ -33,12 +33,12 @@ int main() {
 
 
 /* RPC interface function */
-void PrintMessage(/*string*/ const wchar_t* msg) {
+void PrintMessage(handle_t /*handle*/, /*string*/const wchar_t* msg) {
     wprintf(L"Received message: %s\n", msg);
 }
 
 /* RPC interface function */
-void Shutdown() {
+void Shutdown(handle_t /*handle*/) {
     wprintf(L"Receiving shutdown request.\n");
 
     RPC_STATUS status;

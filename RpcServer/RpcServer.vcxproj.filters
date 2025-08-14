@@ -8,9 +8,6 @@
     <Midl Include="MyRpc.idl" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MyRpc.acf" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="MyRpc_h.h" />
   </ItemGroup>
 </Project>
