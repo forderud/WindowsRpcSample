@@ -26,9 +26,12 @@ int main() {
     unsigned int cMinCalls = 1;
     unsigned int fDontWait = FALSE;
     status = RpcServerListen(cMinCalls, RPC_C_LISTEN_MAX_CALLS_DEFAULT, fDontWait);
-    if (status)
+    if (status) {
+        wprintf(L"RpcServerListen failed with err=%u\n", status);
         exit(status);
+    }
 
+    wprintf(L"[done]\n");
     return 0;
 }
 
