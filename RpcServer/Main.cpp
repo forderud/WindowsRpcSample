@@ -7,7 +7,7 @@
 
 int main() {
     {
-        RPC_SERVER_INTERFACE* ifc = (RPC_SERVER_INTERFACE*)MyRpc_v1_0_s_ifspec;
+        auto* ifc = (RPC_SERVER_INTERFACE*)MyRpc_v1_0_s_ifspec;
         RPC_STATUS status = RpcServerUseProtseqEpA(
             ifc->RpcProtseqEndpoint->RpcProtocolSequence,
             RPC_C_LISTEN_MAX_CALLS_DEFAULT,
