@@ -1,11 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.36330.24 d17.12
+VisualStudioVersion = 17.12.36330.24
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RpcServer", "RpcServer\RpcServer.vcxproj", "{0057C0AF-19C5-400C-A0AC-ABB7089A732B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RpcClient", "RpcClient\RpcClient.vcxproj", "{DC1BB401-9E92-4333-A195-F0D5ADFB1FC9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0057C0AF-19C5-400C-A0AC-ABB7089A732B} = {0057C0AF-19C5-400C-A0AC-ABB7089A732B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
