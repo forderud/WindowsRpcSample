@@ -11,8 +11,8 @@
 int main() {
     RPC_SERVER_INTERFACE* ifc = (RPC_SERVER_INTERFACE*)hello_v1_0_c_ifspec;
 
-    unsigned char* pszOptions = NULL;
-    unsigned char* pszStringBinding = NULL;
+    unsigned char* pszOptions = nullptr;
+    unsigned char* pszStringBinding = nullptr;
     RPC_STATUS status = RpcStringBindingComposeA(nullptr, // Uuid
         ifc->RpcProtseqEndpoint->RpcProtocolSequence,
         nullptr, // NetworkAddress
@@ -26,16 +26,19 @@ int main() {
     if (status)
         exit(status);
 
+    // clean up string
+    status = RpcStringFreeA(&pszStringBinding);
+    if (status)
+        exit(status);
+    pszStringBinding = nullptr;
+
+
     {
         // call RPC functions
         HelloProc(L"hello, world");
 
         Shutdown();
     }
-
-    status = RpcStringFreeA(&pszStringBinding);
-    if (status)
-        exit(status);
 
     status = RpcBindingFree(&hello_IfHandle);
     if (status)
