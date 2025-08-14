@@ -12,9 +12,9 @@ int main() {
     unsigned short* pszOptions = NULL;
     unsigned short* pszStringBinding = NULL;
     RPC_STATUS status = RpcStringBindingComposeW(nullptr, // Uuid
-        (unsigned short*)L"ncacn_np",
+        (unsigned short*)L"ncalrpc",
         nullptr, // NetworkAddress
-        (unsigned short*)L"\\pipe\\hello",
+        (unsigned short*)L"ncalrpc:[MyRpcServer]",
         pszOptions,
         &pszStringBinding);
     if (status)

@@ -10,9 +10,9 @@
 
 int main() {
     RPC_STATUS status = RpcServerUseProtseqEpW(
-        (unsigned short*)L"ncacn_np",
+        (unsigned short*)L"ncalrpc",
         RPC_C_LISTEN_MAX_CALLS_DEFAULT,
-        (unsigned short*)L"\\pipe\\hello",
+        (unsigned short*)L"ncalrpc:[MyRpcServer]",
         nullptr); // Security
     if (status)
         exit(status);
