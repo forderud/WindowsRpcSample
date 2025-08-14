@@ -2,9 +2,12 @@
  version(1.0),
  endpoint("ncalrpc:[MyRcpServer]")]
 interface MyRpc {
+    [helpstring("Print a message to the server console")]
     void PrintMessage([in, string] const wchar_t* msg);
 
+    [helpstring("Compute the sum of two integers")]
     int ComputeSum([in] int a, [in] int b);
 
+    [helpstring("Request the server to shut down")]
     void RequestShutdown();
 }
