@@ -30,8 +30,8 @@ int main() {
 
 
 /* RPC interface function */
-void HelloProc(/*string*/ unsigned char* msg) {
-    printf("Received message: %s\n", msg);
+void HelloProc(/*string*/ const wchar_t* msg) {
+    wprintf(L"Received message: %s\n", msg);
 }
 
 /* RPC interface function */

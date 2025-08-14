@@ -26,7 +26,7 @@ int main() {
 
     {
         // call RPC functions
-        HelloProc((unsigned char*)"hello, world");
+        HelloProc(L"hello, world");
 
         Shutdown();
     }
