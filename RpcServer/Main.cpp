@@ -4,7 +4,8 @@
 
 #pragma comment(lib, "Rpcrt4.lib")
 
-/** Get client process ID (PID) during processing of incoming RPC call. */
+/** Get client process ID (PID) during processing of incoming RPC call.
+    Only supported for the "ncalrpc" local RPC protocol. */
 static size_t GetClientProcessID(RPC_BINDING_HANDLE binding = nullptr) {
     RPC_CALL_ATTRIBUTES attribs{};
     attribs.Version = RPC_CALL_ATTRIBUTES_VERSION; // 3
