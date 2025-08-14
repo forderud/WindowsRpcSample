@@ -36,6 +36,11 @@ void PrintMessage(handle_t /*handle*/, /*string*/const wchar_t* msg) {
     wprintf(L"Received message: %s\n", msg);
 }
 
+int ComputeSum(handle_t /*handle*/, int a, int b) {
+    wprintf(L"Computing the sum of %i and %i...\n", a, b);
+    return a + b;
+}
+
 /* RPC interface function */
 void RequestShutdown(handle_t /*handle*/) {
     wprintf(L"Receiving shutdown request.\n");

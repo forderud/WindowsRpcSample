@@ -34,6 +34,9 @@ int main() {
     wprintf(L"Calling RPC function...\n");
     PrintMessage(serverHandle, L"Hi, there!");
 
+    auto sum = ComputeSum(serverHandle, 7, 8);
+    wprintf(L"7 + 8 = %i\n", sum);
+
     wprintf(L"Requesting server shutdown...\n");
     RequestShutdown(serverHandle);
 

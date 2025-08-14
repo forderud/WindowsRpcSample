@@ -4,5 +4,7 @@
 interface MyRpc {
     void PrintMessage([in, string] const wchar_t* msg);
 
+    int ComputeSum([in] int a, [in] int b);
+
     void RequestShutdown();
 }
