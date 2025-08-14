@@ -13,25 +13,44 @@ int main() {
         RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned char*)"\\pipe\\hello",
         nullptr); // Security
-    if (status) exit(status);
+    if (status)
+        exit(status);
 
-    unsigned int    cMinCalls = 1;
-    unsigned int    fDontWait = FALSE;
-    status = RpcServerRegisterIf(hello_IfHandle, // TODO: hello_ServerIfHandle in doc
+    status = RpcServerRegisterIf(hello_v1_0_s_ifspec,
         NULL,
         NULL);
-    if (status) exit(status);
+    if (status)
+        exit(status);
 
-    status = RpcServerListen(cMinCalls,
-        RPC_C_LISTEN_MAX_CALLS_DEFAULT,
-        fDontWait);
-    if (status) exit(status);
+    unsigned int cMinCalls = 1;
+    unsigned int fDontWait = FALSE;
+    status = RpcServerListen(cMinCalls, RPC_C_LISTEN_MAX_CALLS_DEFAULT, fDontWait);
+    if (status)
+        exit(status);
 }
 
-void __RPC_FAR* __RPC_USER midl_user_allocate(size_t len) {
+
+/* RPC interface function */
+void HelloProc(/*string*/ unsigned char* msg) {
+    printf("Received message: %s\n", msg);
+}
+
+/* RPC interface function */
+void Shutdown(void) {
+    RPC_STATUS status;
+    status = RpcMgmtStopServerListening(NULL);
+    if (status)
+        exit(status);
+
+    status = RpcServerUnregisterIf(NULL, NULL, FALSE);
+    if (status)
+        exit(status);
+}
+
+void* midl_user_allocate(size_t len) {
     return malloc(len);
 }
 
-void __RPC_USER midl_user_free(void __RPC_FAR* ptr) {
+void midl_user_free(void __RPC_FAR* ptr) {
     free(ptr);
 }

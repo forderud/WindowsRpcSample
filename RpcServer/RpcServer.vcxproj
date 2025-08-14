@@ -72,7 +72,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="hello_c.c" />
+    <ClCompile Include="hello_s.c" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +80,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="hello.acf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="hello_h.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
