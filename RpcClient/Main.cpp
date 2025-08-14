@@ -12,19 +12,19 @@ static void InspectServerBinding(RPC_BINDING_HANDLE binding) {
     assert(!status);
 
     RPC_WSTR uuid = nullptr;
-    wchar_t* protSeq = nullptr;
+    RPC_WSTR protSeq = nullptr;
     RPC_WSTR netAddr = nullptr;
-    wchar_t* endpoint = nullptr;
+    RPC_WSTR endpoint = nullptr;
     RPC_WSTR options = nullptr;
-    status = RpcStringBindingParseW(strBinding, &uuid, (unsigned short**)&protSeq, &netAddr, (unsigned short**)&endpoint, &options);
+    status = RpcStringBindingParseW(strBinding, &uuid, &protSeq, &netAddr, &endpoint, &options);
     assert(!status);
 
-    wprintf(L"Server protocol: %s, endpoint: %s\n", protSeq, endpoint);
+    wprintf(L"Server protocol: %s, endpoint: %s\n", (wchar_t*)protSeq, (wchar_t*)endpoint);
 
     RpcStringFreeW(&uuid);
-    RpcStringFreeW((unsigned short**)&protSeq);
+    RpcStringFreeW(&protSeq);
     RpcStringFreeW(&netAddr);
-    RpcStringFreeW((unsigned short**)&endpoint);
+    RpcStringFreeW(&endpoint);
     RpcStringFreeW(&options);
 
     RpcStringFreeW(&strBinding);
