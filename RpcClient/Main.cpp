@@ -37,15 +37,17 @@ int main() {
         stringBinding = nullptr;
     }
 
-    // call RPC functions
-    HelloProc(L"hello, world");
+    wprintf(L"Calling RPC function...\n");
+    HelloProc(L"Hi, there!");
 
+    wprintf(L"Requesting server shutdown...\n");
     Shutdown();
 
     status = RpcBindingFree(&hello_IfHandle);
     if (status)
         exit(status);
 
+    wprintf(L"[done]\n");
     exit(0);
 }
 

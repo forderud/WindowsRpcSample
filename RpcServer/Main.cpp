@@ -39,7 +39,9 @@ void HelloProc(/*string*/ const wchar_t* msg) {
 }
 
 /* RPC interface function */
-void Shutdown(void) {
+void Shutdown() {
+    wprintf(L"Receiving shutdown request.\n");
+
     RPC_STATUS status;
     status = RpcMgmtStopServerListening(NULL);
     if (status)
