@@ -1,7 +1,7 @@
 Sample Windows RPC code. Demonstrates how to perform Remote Procedure Calls (RPC) to call functions across process boundaries.
 
 
-Using the [`ncalrpc`](https://learn.microsoft.com/en-us/windows/win32/midl/ncalrpc) (ALPC) transport, which is the same as used for inter-process COM calls.
+Using the [`ncalrpc`](https://learn.microsoft.com/en-us/windows/win32/midl/ncalrpc) (ALPC) transport, which is the same as COM uses for inter-process calls.
 
 [Process Explorer](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) can be used to inspect the RPC ports exposed by the server:  
 <img width="786" height="288" alt="image" src="https://github.com/user-attachments/assets/49abed8f-81eb-4a95-968f-ab8f7cde5f56" />
