@@ -40,8 +40,7 @@ void PrintMessage(handle_t /*handle*/, /*string*/const wchar_t* msg) {
 void RequestShutdown(handle_t /*handle*/) {
     wprintf(L"Receiving shutdown request.\n");
 
-    RPC_STATUS status;
-    status = RpcMgmtStopServerListening(NULL);
+    RPC_STATUS status = RpcMgmtStopServerListening(NULL);
     if (status)
         exit(status);
 
