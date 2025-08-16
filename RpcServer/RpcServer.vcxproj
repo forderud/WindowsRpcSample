@@ -72,14 +72,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MyRpc_s.c" />
+    <ClCompile Include="hello_s.c" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="MyRpc.idl" />
+    <Midl Include="hello.idl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyRpc_h.h" />
+    <None Include="hello.acf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="hello_h.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

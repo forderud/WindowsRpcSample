@@ -1,85 +1,70 @@
-#include <cassert>
+/* file: helloc.c */
+#include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
+#include "../RpcServer/hello_h.h" 
 #include <windows.h>
-#include "../RpcServer/MyRpc_h.h"
 
 #pragma comment(lib, "Rpcrt4.lib")
 
-/** WIP code for trying to get the process ID from a RPC binding. */
-static void InspectServerBinding(RPC_BINDING_HANDLE binding) {
-    RPC_WSTR strBinding = nullptr;
-    RPC_STATUS status = RpcBindingToStringBindingW(binding, &strBinding);
-    assert(!status);
 
-    RPC_WSTR uuid = nullptr;
-    RPC_WSTR protSeq = nullptr;
-    RPC_WSTR netAddr = nullptr;
-    RPC_WSTR endpoint = nullptr;
-    RPC_WSTR options = nullptr;
-    status = RpcStringBindingParseW(strBinding, &uuid, &protSeq, &netAddr, &endpoint, &options);
-    assert(!status);
+int main()
+{
+    RPC_STATUS status;
+    unsigned char* pszUuid = NULL;
+    unsigned char* pszProtocolSequence = (unsigned char*)"ncacn_np";
+    unsigned char* pszNetworkAddress = NULL;
+    unsigned char* pszEndpoint = (unsigned char*)"\\pipe\\hello";
+    unsigned char* pszOptions = NULL;
+    unsigned char* pszStringBinding = NULL;
+    unsigned char* pszString = (unsigned char*)"hello, world";
+    unsigned long ulCode;
 
-    wprintf(L"Server protocol: %s, endpoint: %s\n", (wchar_t*)protSeq, (wchar_t*)endpoint);
+    status = RpcStringBindingComposeA(pszUuid,
+        pszProtocolSequence,
+        pszNetworkAddress,
+        pszEndpoint,
+        pszOptions,
+        &pszStringBinding);
+    if (status) exit(status);
 
-    RpcStringFreeW(&uuid);
-    RpcStringFreeW(&protSeq);
-    RpcStringFreeW(&netAddr);
-    RpcStringFreeW(&endpoint);
-    RpcStringFreeW(&options);
+    status = RpcBindingFromStringBindingA(pszStringBinding, &hello_IfHandle);
 
-    RpcStringFreeW(&strBinding);
-}
+    if (status) exit(status);
 
-int main() {
-    RPC_BINDING_HANDLE serverHandle = nullptr;
+    RpcTryExcept
     {
-        unsigned char* stringBinding = nullptr;
-        auto* ifc = (RPC_SERVER_INTERFACE*)MyRpc_v1_0_c_ifspec;
-        RPC_STATUS status = RpcStringBindingComposeA(nullptr, // uuid
-            ifc->RpcProtseqEndpoint->RpcProtocolSequence,
-            nullptr, // net addr.
-            ifc->RpcProtseqEndpoint->Endpoint,
-            nullptr, // options
-            &stringBinding);
-        if (status)
-            exit(status);
-
-        // create server handle (doesn't actually connect)
-        status = RpcBindingFromStringBindingA(stringBinding, &serverHandle);
-        if (status)
-            exit(status);
-
-        // clean up string
-        status = RpcStringFreeA(&stringBinding);
-        if (status)
-            exit(status);
-        stringBinding = nullptr;
+        HelloProc(pszString);
+        Shutdown();
     }
+        RpcExcept(1)
+    {
+        ulCode = RpcExceptionCode();
+        printf("Runtime reported exception 0x%lx = %ld\n", ulCode, ulCode);
+    }
+    RpcEndExcept
 
-    InspectServerBinding(serverHandle);
+        status = RpcStringFreeA(&pszStringBinding);
 
-    wprintf(L"Calling RPC function...\n");
-    PrintMessage(serverHandle, L"Hi, there!");
+    if (status) exit(status);
 
-    auto sum = ComputeSum(serverHandle, 7, 8);
-    wprintf(L"7 + 8 = %i\n", sum);
+    status = RpcBindingFree(&hello_IfHandle);
 
-    wprintf(L"Requesting server shutdown...\n");
-    RequestShutdown(serverHandle);
+    if (status) exit(status);
 
-    RPC_STATUS status = RpcBindingFree(&serverHandle);
-    if (status)
-        exit(status);
-
-    wprintf(L"[done]\n");
-    return 0;
+    exit(0);
 }
 
+/******************************************************/
+/*         MIDL allocate and free                     */
+/******************************************************/
 
-void* midl_user_allocate(size_t len) {
-    return malloc(len);
+void __RPC_FAR* __RPC_USER midl_user_allocate(size_t len)
+{
+    return(malloc(len));
 }
 
-void midl_user_free(void __RPC_FAR* ptr) {
+void __RPC_USER midl_user_free(void __RPC_FAR* ptr)
+{
     free(ptr);
 }
